@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+                <title></title>
+                <link rel="stylesheet" href="https://rerubx.zwjk.com/v1.3.0/rbk-v1.3.0.min.css">
+                    
+                    <script src="https://rerubx.zwjk.com/v1.3.0/jquery.min.js"></script>
+                    <script src="https://rerubx.zwjk.com/v1.3.0/rbk-v1.3.0.min.js"></script>
+                    
+                    <script>
+                        rbk.ready(function(opt) {
+                                  var titlebar = rbk.getCmp('titlebar')
+                                  titlebar.title('call测试')
+                                  
+                                  var btn1 = rbk.getCmp('#btn1')
+                                  var btn2 = rbk.getCmp('#btn2')
+                                  var params = {'Phone':'13933333333'};
+                                  
+                                  btn1.bindClick(function(){
+                                                 RbJSBridge.call('sendInfoToNative',{
+                                                                 name:'helloWorld'
+                                                                 })
+                                                 })
+                                  
+                                  btn2.bindClick(function(){
+                                                 RbJSBridge.call('getInfoFromNative',
+                                                                 params
+                                                                 ,function(d){
+                                                                 console.log(d)
+                                                                 })
+                                                 })
+                                  });
+                        </script>
+                    </head>
+    
+    <body>
+        <header class="rbk-titlebar"></header>
+        <div class="rbk-content">
+            <button id="btn1" class="rbk-btn">按钮</button>
+            <button id="btn2" class="rbk-btn">回调按钮</button>
+        </div>
+    </body>
+</html>

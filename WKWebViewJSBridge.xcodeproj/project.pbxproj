@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A312D7F1F384B65003C91CC /* URWKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A312D7E1F384B65003C91CC /* URWKWebViewController.m */; };
 		9A39519E1F305CEA0082409A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A39519D1F305CEA0082409A /* main.m */; };
 		9A3951A11F305CEA0082409A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3951A01F305CEA0082409A /* AppDelegate.m */; };
 		9A3951A41F305CEA0082409A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3951A31F305CEA0082409A /* ViewController.m */; };
@@ -17,9 +18,12 @@
 		9A4225151F307623003E55A9 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A4225141F307623003E55A9 /* test.html */; };
 		9A4225171F30783F003E55A9 /* RbJSBridge.js in Resources */ = {isa = PBXBuildFile; fileRef = 9A4225161F30783F003E55A9 /* RbJSBridge.js */; };
 		9A42251B1F307C1C003E55A9 /* WKWebViewJSBridge+InteractFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A42251A1F307C1C003E55A9 /* WKWebViewJSBridge+InteractFunction.m */; };
+		9A7F2F261F396D78001FC04C /* WKWebViewJSBridgeResource.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F2F251F396D78001FC04C /* WKWebViewJSBridgeResource.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A312D7D1F384B65003C91CC /* URWKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = URWKWebViewController.h; path = WKWebViewJSBridge/URWKWebViewController.h; sourceTree = "<group>"; };
+		9A312D7E1F384B65003C91CC /* URWKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URWKWebViewController.m; path = WKWebViewJSBridge/URWKWebViewController.m; sourceTree = "<group>"; };
 		9A3951991F305CE90082409A /* WKWebViewJSBridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKWebViewJSBridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A39519D1F305CEA0082409A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9A39519F1F305CEA0082409A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -36,6 +40,7 @@
 		9A4225161F30783F003E55A9 /* RbJSBridge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = RbJSBridge.js; sourceTree = "<group>"; };
 		9A4225191F307C1C003E55A9 /* WKWebViewJSBridge+InteractFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebViewJSBridge+InteractFunction.h"; sourceTree = "<group>"; };
 		9A42251A1F307C1C003E55A9 /* WKWebViewJSBridge+InteractFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebViewJSBridge+InteractFunction.m"; sourceTree = "<group>"; };
+		9A7F2F251F396D78001FC04C /* WKWebViewJSBridgeResource.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = WKWebViewJSBridgeResource.xcassets; path = WKWebViewJSBridge/WKWebViewJSBridgeResource.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +103,10 @@
 			children = (
 				9A3951B41F305DA20082409A /* WKWebViewJSBridge.h */,
 				9A3951B51F305DA20082409A /* WKWebViewJSBridge.m */,
+				9A312D7D1F384B65003C91CC /* URWKWebViewController.h */,
+				9A312D7E1F384B65003C91CC /* URWKWebViewController.m */,
 				9A4225161F30783F003E55A9 /* RbJSBridge.js */,
+				9A7F2F251F396D78001FC04C /* WKWebViewJSBridgeResource.xcassets */,
 			);
 			name = WKWebViewJSBridge;
 			sourceTree = "<group>";
@@ -162,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A4225171F30783F003E55A9 /* RbJSBridge.js in Resources */,
+				9A7F2F261F396D78001FC04C /* WKWebViewJSBridgeResource.xcassets in Resources */,
 				9A4225151F307623003E55A9 /* test.html in Resources */,
 				9A3951AC1F305CEA0082409A /* LaunchScreen.storyboard in Resources */,
 				9A3951A91F305CEA0082409A /* Assets.xcassets in Resources */,
@@ -180,6 +189,7 @@
 				9A3951A11F305CEA0082409A /* AppDelegate.m in Sources */,
 				9A42251B1F307C1C003E55A9 /* WKWebViewJSBridge+InteractFunction.m in Sources */,
 				9A39519E1F305CEA0082409A /* main.m in Sources */,
+				9A312D7F1F384B65003C91CC /* URWKWebViewController.m in Sources */,
 				9A3951B61F305DA20082409A /* WKWebViewJSBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

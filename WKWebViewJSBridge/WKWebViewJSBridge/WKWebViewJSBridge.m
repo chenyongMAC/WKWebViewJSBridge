@@ -29,19 +29,24 @@ static WKWebViewJSBridge *manager = nil;
 }
 
 - (WKWebViewConfiguration *)defaultConfiguration {
-    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-    config.preferences = [[WKPreferences alloc] init];
-    config.preferences.minimumFontSize = 10;    // 默认为0
-    config.preferences.javaScriptEnabled = YES;
-    config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
-    config.processPool = [[WKProcessPool alloc] init];
-    config.userContentController = [[WKUserContentController alloc] init];
+    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+    configuration.allowsAirPlayForMediaPlayback = YES;  //视频播放
+    configuration.allowsInlineMediaPlayback = YES;  //在线播放
+    configuration.selectionGranularity = YES;   //与网页交互, 选择视图
+    configuration.processPool = [[WKProcessPool alloc] init];
+    configuration.suppressesIncrementalRendering = YES;
     
+    configuration.preferences = [[WKPreferences alloc] init];
+    configuration.preferences.minimumFontSize = 10;    // 默认为0
+    configuration.preferences.javaScriptEnabled = YES;
+    configuration.preferences.javaScriptCanOpenWindowsAutomatically = YES;
+    
+    configuration.userContentController = [[WKUserContentController alloc] init];
     WKUserScript *usrScript = [[WKUserScript alloc] initWithSource:[WKWebViewJSBridge shareInstance].injectJS injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-    [config.userContentController addUserScript:usrScript];
-    [config.userContentController addScriptMessageHandler:[WKWebViewJSBridge shareInstance] name:RbJSBridgeEvent];
+    [configuration.userContentController addUserScript:usrScript];
+    [configuration.userContentController addScriptMessageHandler:[WKWebViewJSBridge shareInstance] name:RbJSBridgeEvent];
     
-    return config;
+    return configuration;
 }
 
 #pragma mark - private

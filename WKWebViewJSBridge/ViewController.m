@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "WKWebViewJSBridge.h"
+#import "URWKWebViewController.h"
 
 extern NSString * const RbJSBridgeEvent;
 
@@ -25,8 +26,22 @@ extern NSString * const RbJSBridgeEvent;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    [self initWebView];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 200, 50, 30)];
+    [btn setTitle:@"hello" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(clickAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    
+//    [self initWebView];
+}
+
+- (void)clickAction {
+    URWKWebViewController *wkcontroller = [[URWKWebViewController alloc] init];
+    NSString *urlStr = [NSString stringWithFormat:@"file://%@",[[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"]];
+    [wkcontroller loadWebViewWithString:urlStr type:URWKWebViewType_URL];
+    [self.navigationController pushViewController:wkcontroller animated:YES];
 }
 
 - (void)initWebView {

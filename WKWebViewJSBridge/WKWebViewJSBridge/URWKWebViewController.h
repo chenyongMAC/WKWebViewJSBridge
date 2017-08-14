@@ -11,11 +11,13 @@
 typedef NS_ENUM(NSUInteger, URWKWebViewType) {
     URWKWebViewType_URL,
     URWKWebViewType_HTML,
+    URWKWebViewType_RbUserAgent_URL
 };
 
 @interface URWKWebViewController : UIViewController
 
 @property (nonatomic, assign) BOOL isNavHidden;
+@property (nonatomic, assign) BOOL needIntercept;
 
 - (void)loadWebViewWithString:(NSString *)string type:(URWKWebViewType)type;
 

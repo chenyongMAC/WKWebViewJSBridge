@@ -39,8 +39,9 @@ extern NSString * const RbJSBridgeEvent;
 
 - (void)clickAction {
     URWKWebViewController *wkcontroller = [[URWKWebViewController alloc] init];
-    NSString *urlStr = [NSString stringWithFormat:@"file://%@",[[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"]];
-    [wkcontroller loadWebViewWithString:urlStr type:URWKWebViewType_URL];
+//    NSString *urlString = [NSString stringWithFormat:@"file://%@",[[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"]];
+    NSString *urlString = @"http://pconsole.ucmed.cn/build/docs/DefaultTheme/components/platform.html";
+    [wkcontroller loadWebViewWithString:urlString type:URWKWebViewType_RbUserAgent_URL];
     [self.navigationController pushViewController:wkcontroller animated:YES];
 }
 

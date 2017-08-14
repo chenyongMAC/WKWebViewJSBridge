@@ -9,6 +9,7 @@
 #import "URWKWebViewController.h"
 #import <WebKit/WebKit.h>
 #import "WKWebViewJSBridge.h"
+#import "NSURLProtocol+WebKitSupport.h"
 
 static void *URWkWebViewContext = &URWkWebViewContext;
 
@@ -28,6 +29,15 @@ static void *URWkWebViewContext = &URWkWebViewContext;
 
 - (void)dealloc {
     [self.webView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _needIntercept = NO;
+        _isNavHidden = NO;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -50,6 +60,16 @@ static void *URWkWebViewContext = &URWkWebViewContext;
         [self.view addSubview:statusBarView];
     } else {
         self.navigationController.navigationBarHidden = NO;
+    }
+    
+    if (_needIntercept) {
+        for (NSString* scheme in @[@"http", @"https"]) {
+                [NSURLProtocol wk_registerScheme:scheme];
+        }
+    } else {
+        for (NSString* scheme in @[@"http", @"https"]) {
+            [NSURLProtocol wk_unregisterScheme:scheme];
+        }
     }
 }
 
@@ -106,6 +126,16 @@ static void *URWkWebViewContext = &URWkWebViewContext;
     self.title = self.webView.title;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [self updateNavigationItems];
+    
+    [self evaluateJSInit];
+    
+}
+
+- (void)evaluateJSInit {
+    NSString *js = [NSString stringWithFormat:@"RbJSBridge._handleMessageFromApp('%@');", @"{\"__msg_type\":\"event\",\"__event_id\":\"sys:init\"}"];
+    [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable i, NSError * _Nullable error) {
+        NSLog(@"11");
+    }];
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
@@ -170,6 +200,24 @@ initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completi
         case URWKWebViewType_URL: {
             NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
             [self.webView loadRequest:request];
+            
+            break;
+        }
+        case URWKWebViewType_RbUserAgent_URL: {
+            __weak typeof(self) weakSelf = self;
+            [self.webView evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id result, NSError *error) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                
+                NSString *userAgent = result;
+                if (![result hasSuffix:@" MonkeyCenter/1.0.0 rubikui"]) {
+                    NSString *newUserAgent = [userAgent stringByAppendingString:@" MonkeyCenter/1.0.0 rubikui"];
+                    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent":newUserAgent}];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+                [strongSelf.webView loadRequest:request];
+            }];
             
             break;
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A087A681F3C5ABA001E6830 /* NSURLProtocol+WebKitSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A087A671F3C5ABA001E6830 /* NSURLProtocol+WebKitSupport.m */; };
 		9A312D7F1F384B65003C91CC /* URWKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A312D7E1F384B65003C91CC /* URWKWebViewController.m */; };
 		9A39519E1F305CEA0082409A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A39519D1F305CEA0082409A /* main.m */; };
 		9A3951A11F305CEA0082409A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3951A01F305CEA0082409A /* AppDelegate.m */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A087A661F3C5ABA001E6830 /* NSURLProtocol+WebKitSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURLProtocol+WebKitSupport.h"; path = "WKWebViewJSBridge/NSURLProtocol+WebKitSupport.h"; sourceTree = "<group>"; };
+		9A087A671F3C5ABA001E6830 /* NSURLProtocol+WebKitSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURLProtocol+WebKitSupport.m"; path = "WKWebViewJSBridge/NSURLProtocol+WebKitSupport.m"; sourceTree = "<group>"; };
 		9A312D7D1F384B65003C91CC /* URWKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = URWKWebViewController.h; path = WKWebViewJSBridge/URWKWebViewController.h; sourceTree = "<group>"; };
 		9A312D7E1F384B65003C91CC /* URWKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URWKWebViewController.m; path = WKWebViewJSBridge/URWKWebViewController.m; sourceTree = "<group>"; };
 		9A3951991F305CE90082409A /* WKWebViewJSBridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKWebViewJSBridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +108,8 @@
 				9A3951B51F305DA20082409A /* WKWebViewJSBridge.m */,
 				9A312D7D1F384B65003C91CC /* URWKWebViewController.h */,
 				9A312D7E1F384B65003C91CC /* URWKWebViewController.m */,
+				9A087A661F3C5ABA001E6830 /* NSURLProtocol+WebKitSupport.h */,
+				9A087A671F3C5ABA001E6830 /* NSURLProtocol+WebKitSupport.m */,
 				9A4225161F30783F003E55A9 /* RbJSBridge.js */,
 				9A7F2F251F396D78001FC04C /* WKWebViewJSBridgeResource.xcassets */,
 			);
@@ -188,6 +193,7 @@
 				9A3951A41F305CEA0082409A /* ViewController.m in Sources */,
 				9A3951A11F305CEA0082409A /* AppDelegate.m in Sources */,
 				9A42251B1F307C1C003E55A9 /* WKWebViewJSBridge+InteractFunction.m in Sources */,
+				9A087A681F3C5ABA001E6830 /* NSURLProtocol+WebKitSupport.m in Sources */,
 				9A39519E1F305CEA0082409A /* main.m in Sources */,
 				9A312D7F1F384B65003C91CC /* URWKWebViewController.m in Sources */,
 				9A3951B61F305DA20082409A /* WKWebViewJSBridge.m in Sources */,
@@ -257,7 +263,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -300,7 +306,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -313,6 +319,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WKWebViewJSBridge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hello.WKWebViewJSBridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -324,6 +331,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WKWebViewJSBridge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hello.WKWebViewJSBridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";

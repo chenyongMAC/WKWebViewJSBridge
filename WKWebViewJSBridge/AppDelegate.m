@@ -24,7 +24,24 @@
     self.window.rootViewController = naVC;
     [self.window makeKeyAndVisible];
     
+    [self updateUserAgent];
+    
     return YES;
+}
+
+- (void)updateUserAgent {
+    //全局修改UserAgent
+    NSString *nativeAgent = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserAgent"];
+    if (![nativeAgent hasSuffix:@" MonkeyCenter/1.0.0 rubikui"]) {
+    }
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSString *oldAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    //add my info to the new agent
+    NSString *newAgent = [oldAgent stringByAppendingString:@" MonkeyCenter/1.0.0 rubikui"];
+    //regist the new agent
+    NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:newAgent, @"UserAgent", nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

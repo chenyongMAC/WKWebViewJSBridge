@@ -176,7 +176,7 @@
 		}
 		var ret;
 		var msgWrap;
-		msgWrap = message;
+		msgWrap = JSON.parse(message);
   
 		switch(msgWrap[_MESSAGE_TYPE]) {
   case 'callback':

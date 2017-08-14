@@ -7,10 +7,19 @@
 //
 
 #import "WKWebViewJSBridge.h"
+#import "URWKWebViewController.h"
 
 NSString * const RbJSBridgeEvent = @"RbJSBridgeEvent";
 
 static WKWebViewJSBridge *manager = nil;
+
+@interface WKWebViewJSBridge ()
+
+@property (nonatomic, weak) WKWebView *webView;
+@property (nonatomic, weak) URWKWebViewController *webVC;
+@property (nonatomic, strong, readwrite) NSString *injectJS;
+
+@end
 
 @implementation WKWebViewJSBridge
 
@@ -26,6 +35,14 @@ static WKWebViewJSBridge *manager = nil;
 #pragma mark - public
 + (void)bridgeWebView:(WKWebView *)webView {
     [WKWebViewJSBridge shareInstance].webView = webView;
+}
+
++ (void)bridgeWebView:(WKWebView *)webView webVC:(UIViewController *)controller {
+    [WKWebViewJSBridge shareInstance].webView = webView;
+    
+    if ([controller isKindOfClass:[URWKWebViewController class]]) {
+        [WKWebViewJSBridge shareInstance].webVC = (URWKWebViewController *)controller;
+    }
 }
 
 - (WKWebViewConfiguration *)defaultConfiguration {
@@ -111,9 +128,22 @@ static WKWebViewJSBridge *manager = nil;
                 NSDictionary *params = dict[@"params"];
                 NSString *callBackId = dict[@"__callback_id"];
                 BOOL needCallback = [dict[@"needCallback"] boolValue];
+                
+                //把webView和webVC拼进params, 交互方法可能需要该参数
+                NSMutableDictionary *sendParams = nil;
+                if ([params isKindOfClass:[NSDictionary class]]) {
+                    sendParams = [NSMutableDictionary dictionaryWithDictionary:params];
+                    if (_webView != nil) {
+                        [sendParams setObject:_webView forKey:@"webView"];
+                    }
+                    if (_webVC != nil) {
+                        [sendParams setObject:_webVC forKey:@"webVC"];
+                    }
+                }
+                
                 if (needCallback) {
                     __weak  WKWebView *weakWebView = _webView;
-                    [self interactWitMethodName:methodName params:params callback:^(id response) {
+                    [self interactWitMethodName:methodName params:sendParams callback:^(id response) {
                         NSString *js = [NSString stringWithFormat:@"RbJSBridge._handleMessageFromApp('%@','%@');", callBackId, response];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [weakWebView evaluateJavaScript:js completionHandler:^(id _Nullable data, NSError * _Nullable error) {
@@ -121,7 +151,7 @@ static WKWebViewJSBridge *manager = nil;
                         });
                     }];
                 } else {
-                    [self interactWitMethodName:methodName params:params callback:nil];
+                    [self interactWitMethodName:methodName params:sendParams callback:nil];
                 }
             }
         }

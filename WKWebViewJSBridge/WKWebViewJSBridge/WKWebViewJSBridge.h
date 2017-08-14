@@ -11,13 +11,12 @@
 
 @interface WKWebViewJSBridge : NSObject <WKScriptMessageHandler>
 
-@property (nonatomic, weak) WKWebView *webView;
-@property (nonatomic, strong) NSString *injectJS;
+@property (nonatomic, strong, readonly) NSString *injectJS;
 
 + (instancetype)shareInstance;
+- (WKWebViewConfiguration *)defaultConfiguration;
 
 + (void)bridgeWebView:(WKWebView *)webView;
-
-- (WKWebViewConfiguration *)defaultConfiguration;
++ (void)bridgeWebView:(WKWebView *)webView webVC:(UIViewController *)controller;
 
 @end

@@ -21,4 +21,6 @@ typedef NS_ENUM(NSUInteger, URWKWebViewType) {
 
 - (void)loadWebViewWithString:(NSString *)string type:(URWKWebViewType)type;
 
++ (void)updateUserAgent;
+
 @end

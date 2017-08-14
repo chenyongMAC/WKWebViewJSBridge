@@ -64,7 +64,7 @@ static void *URWkWebViewContext = &URWkWebViewContext;
     
     if (_needIntercept) {
         for (NSString* scheme in @[@"http", @"https"]) {
-                [NSURLProtocol wk_registerScheme:scheme];
+            [NSURLProtocol wk_registerScheme:scheme];
         }
     } else {
         for (NSString* scheme in @[@"http", @"https"]) {
@@ -77,6 +77,21 @@ static void *URWkWebViewContext = &URWkWebViewContext;
 - (void)loadWebViewWithString:(NSString *)string type:(URWKWebViewType)type {
     self.urlString = string;
     self.loadType = type;
+}
+
++ (void)updateUserAgent {
+    //全局修改UserAgent
+    NSString *nativeAgent = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserAgent"];
+    if (![nativeAgent hasSuffix:@" MonkeyCenter/1.0.0 rubikui"]) {
+    }
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSString *oldAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    //add my info to the new agent
+    NSString *newAgent = [oldAgent stringByAppendingString:@" MonkeyCenter/1.0.0 rubikui"];
+    //regist the new agent
+    NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:newAgent, @"UserAgent", nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - Action
@@ -259,6 +274,7 @@ initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completi
     if (_webView == nil) {
         WKWebViewConfiguration *configuration = [WKWebViewJSBridge shareInstance].defaultConfiguration;
         _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:configuration];
+        [WKWebViewJSBridge bridgeWebView:_webView webVC:self];
         _webView.UIDelegate = self;
         _webView.navigationDelegate = self;
         _webView.allowsBackForwardNavigationGestures = YES;

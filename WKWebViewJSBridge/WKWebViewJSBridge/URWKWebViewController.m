@@ -24,6 +24,7 @@ static void *URWkWebViewContext = &URWkWebViewContext;
 @property (nonatomic, strong) NSMutableArray* snapShotsArray;
 @property (nonatomic, strong) NSMutableArray* snapShotsArray11;
 @property (nonatomic, strong) NSMutableArray* snapShotsArray22;
+@property (nonatomic, strong) NSMutableArray* snapShotsArray33;
 @end
 
 @implementation URWKWebViewController

@@ -23,6 +23,7 @@ static void *URWkWebViewContext = &URWkWebViewContext;
 @property (nonatomic, strong) UIBarButtonItem* closeButtonItem;
 @property (nonatomic, strong) NSMutableArray* snapShotsArray;
 @property (nonatomic, strong) NSMutableArray* snapShotsArray11;
+@property (nonatomic, strong) NSMutableArray* snapShotsArray22;
 @end
 
 @implementation URWKWebViewController
